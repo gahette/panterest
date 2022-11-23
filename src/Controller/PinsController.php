@@ -58,19 +58,23 @@ class PinsController extends AbstractController
     {
         $form = $this->createForm(PinsType::class, $pin, [
             'method' => 'PUT'
-        ]);
 
+        ]);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em->flush();
 
             $this->addFlash('success', 'Pin successfully updated !');
 
             return $this->redirectToRoute('app_home');
         }
+
         return $this->render('pins/edit.html.twig', [
             'pin' => $pin,
             'form' => $form->createView()
+
         ]);
     }
 
