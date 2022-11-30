@@ -13,7 +13,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table('Users')]
 #[ORM\HasLifecycleCallbacks]
-
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 
@@ -49,7 +48,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->pins = new ArrayCollection();
     }
-
 
 
     public function getId(): ?int
@@ -100,7 +98,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -176,5 +174,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getFullName(): string
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
 
 }
